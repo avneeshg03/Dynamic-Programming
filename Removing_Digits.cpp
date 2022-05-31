@@ -15,29 +15,28 @@ using namespace std;
 #define s(v) sort(all(v))
 #define revs(v) sort(all(v), greater<int>())
 #define se second
-int n, x;
-const int N = 1e9 + 7;
-vector<int> coins(105);
-vector<int> dp(1e6 + 5, 0);
+const int N = 1e6 + 5;
+const int inf = INT_MAX;
+vector<int> dp(N, inf);
 int32_t main()
 {
-    cin >> n >> x;
-    for (int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    dp[0] = 0;
+    for (int i = 1; i <= n; i++)
     {
-        cin >> coins[i];
-    }
-    sort(coins.begin(), coins.begin() + n);
-    dp[0] = 1;
-    // cout << solve(x);
-    for (int sum = 1; sum <= x; sum++)
-    {
-        for (int i = 0; i < n; i++)
+        if (i < 10)
         {
-            if (coins[i] <= sum)
-                dp[sum] = (dp[sum] + dp[sum - coins[i]]) % N;
-            else
-            break;
+            dp[i] = 1;
+            continue;
+        }
+        int x = i;
+        while (x > 0)
+        {
+            int no = x % 10;
+            dp[i] = min(dp[i], 1 + dp[i - no]);
+            x /= 10;
         }
     }
-    cout << dp[x];
+    cout << dp[n];
 }
