@@ -29,16 +29,16 @@ Recurrence for dp[i][1]
 BASE CASE dp[n][0]=1,dp[n][1]=1;
 */
 int n = 1000000;
-ll dp[1000001][2];
+ll dp[1000002][2];
 int main()
 {
     FIO;
     int t = 1; // cin >> t;
     while (t--)
     {
-        dp[n + 1][0] = dp[n + 1][1] = 1;
+        dp[n][0] = dp[n][1] = 1;
 
-        for (int i = n; i >= 2; i--)
+        for (int i = n-1; i >= 1; i--)
         {
             ll op1 = (dp[i + 1][1] + dp[i + 1][0]) % mod;
             ll op2 = dp[i + 1][0];
@@ -55,7 +55,7 @@ int main()
         {
             int query;
             cin >> query;
-            cout << (dp[1000000 - query + 2][1] + dp[1000000 - query + 2][0]) % mod << '\n';
+            cout << (dp[1000000 - query + 1][1] + dp[1000000 - query + 1][0]) % mod << '\n';
         }
     }
     return 0;
